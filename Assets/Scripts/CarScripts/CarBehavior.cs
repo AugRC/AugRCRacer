@@ -45,7 +45,7 @@ public class CarBehavior : MonoBehaviour {
 	{
 
 		transform.Rotate(new Vector3(0,angle,0));
-		var newDir = transform.rotation* new Vector3(1,1,0);
+		var newDir = transform.forward;//transform.rotation* new Vector3(1,1,0);
 		this.direction = new Vector2(newDir.x,newDir.y);
 		print (this.direction);
 		
