@@ -19,6 +19,9 @@ public class CarBehavior : MonoBehaviour {
 
 	private Vector2 direction;
 
+	private float tilt=0;
+	private float maxTilt = 30;
+
 	private bool canGo;
 
 	public void StartCar()
@@ -49,6 +52,7 @@ public class CarBehavior : MonoBehaviour {
 		this.direction = new Vector2(newDir.x,newDir.y);
 		
 	}
+
 	// Update is called once per frame
 	void Update () {
 		if(!canGo)
@@ -60,6 +64,10 @@ public class CarBehavior : MonoBehaviour {
 		if(turning != TurnType.NotTurning)
 		{
 			RotateDirection(this.turnSpeed * Time.deltaTime * (turning == TurnType.TurningLeft ? -1 : 1));
+		}
+		else
+		{
+
 		}
 
 		bool onTheRoad = this.groundDetector.IsOverRoad();
