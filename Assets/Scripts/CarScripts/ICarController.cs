@@ -10,9 +10,11 @@ public enum TurnType
 
 public interface ICarController {
 	
-	bool isBreaking();
+	bool isBraking();
 	
-	TurnType isTurningRight();
+	TurnType getTurn();
 
 	void readControls();
+
+
 }
