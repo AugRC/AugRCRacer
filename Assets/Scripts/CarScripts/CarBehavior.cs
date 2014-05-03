@@ -17,7 +17,7 @@ public class CarBehavior : MonoBehaviour {
 	public ICarController controller;
 	private GroundDetector groundDetector;
 
-	private Vector2 direction = new Vector2(1,0);
+	private Vector2 direction;
 
 	private bool canGo;
 
@@ -32,7 +32,7 @@ public class CarBehavior : MonoBehaviour {
 		this.groundDetector = this.GetComponent<GroundDetector>();
 		
 		StartCoroutine(startAfterSec());
-
+		direction = new Vector2(transform.forward.x, transform.forward.y);
 	}
 
 	IEnumerator startAfterSec()
@@ -45,9 +45,8 @@ public class CarBehavior : MonoBehaviour {
 	{
 
 		transform.Rotate(new Vector3(0,angle,0));
-		var newDir = transform.forward;//transform.rotation* new Vector3(1,1,0);
+		var newDir = transform.forward;
 		this.direction = new Vector2(newDir.x,newDir.y);
-		print (this.direction);
 		
 	}
 	// Update is called once per frame
