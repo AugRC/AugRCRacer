@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DummyCarController : ICarController {
+public class CarController : MonoBehaviour{
 	
 	public bool isBraking()
 	{
@@ -22,5 +22,11 @@ public class DummyCarController : ICarController {
 	}
 	
 	public void readControls()
+	{}
+
+	void Start () {
+	}
+
+	void Update()
 	{}
 }
