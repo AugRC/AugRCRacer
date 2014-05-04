@@ -1,25 +1,57 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-<<<<<<< HEAD:Assets/Scripts/CarScripts/DummyCarController.cs
-public class DummyCarController : MonoBehaviour, ICarController  {
-=======
-public class CarController : MonoBehaviour{
->>>>>>> FETCH_HEAD:Assets/Scripts/CarScripts/CarController.cs
+
+public class CarController : MonoBehaviour  {
+	public Texture leftButtonTex;
+	public Texture rightButtonTex;
+	public Texture brakeButtonTex;
 	
-	// return if the person is touching the break
+	private bool brakePressed = false;
+	private bool leftPressed = false;
+	private bool rightPressed = false;
+	
+	void Start () 
+	{
+
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		if (Input.touchCount > 0)
+		{
+			Vector2 touchPosition = Input.GetTouch (0).position;
+			if (touchPosition.x < (Screen.width/5)) 
+			{
+				print (touchPosition.x);
+				Press ("left");
+			}
+			else if (touchPosition.x < (Screen.width * (2f / 5f)))
+			{
+				print (touchPosition.x);
+				Press ("right");
+			}
+			else 
+			{
+				print (touchPosition.x);
+				Press ("brake");
+			} 
+			
+		}
+	}
+	// return if user is touching the brake
 	public bool isBraking()
 	{
-		return Input.GetKey(KeyCode.Space);
+		return brakePressed;
 	}
 	
 	public TurnType getTurn()
 	{
-		if(Input.GetKey(KeyCode.RightArrow))
+		if (rightPressed == true)
 		{
 			return TurnType.TurningRight;
 		}
-		if(Input.GetKey(KeyCode.LeftArrow))
+		else if(leftPressed == true)
 		{
 			return TurnType.TurningLeft;
 		}
@@ -28,19 +60,46 @@ public class CarController : MonoBehaviour{
 	
 	public void readControls()
 	{}
-<<<<<<< HEAD:Assets/Scripts/CarScripts/DummyCarController.cs
+	
+//	void OnGUI ()
+//	{
+//		if (GUI.Button(new Rect(0, 0, Screen.width / 5, Screen.height), "Left"))
+//			print ("Left");
+//			
+//		if (GUI.Button(new Rect(Screen.width / 5, 0, Screen.width / 5, Screen.height), "Right"))
+//			print ("Right");
+//			
+//		if (GUI.Button(new Rect(Screen.width / 2.5f, 0, Screen.width / 1.7f, Screen.height), "Brake"))
+//			print ("Brake");
+//	}
+
+	private void Press (string button)
+	{
+		switch (button)
+		{
+			case "left":
+				leftPressed = true;
+				rightPressed = false;
+				brakePressed = false;
+				break;
+			case "right":
+				leftPressed = false;
+				rightPressed = true;
+				brakePressed = false;
+				break;
+			case "brake":
+				leftPressed = false;
+				rightPressed = false;
+				brakePressed = true;
+				break;
+		}
+	}
 	
 	void OnGUI ()
 	{
-		if (GUI.Button(new Rect(10, 10, 50, 50), "hello"))
-			print ("hello");
-	}
-=======
-
-	void Start () {
+		GUI.DrawTexture(new Rect(Screen.width / 25f, Screen.height / 3f, Screen.width / 7f, Screen.height), leftButtonTex, ScaleMode.ScaleToFit, true);
+		GUI.DrawTexture(new Rect(Screen.width / 5f, Screen.height / 3f, Screen.width / 7f, Screen.height), rightButtonTex, ScaleMode.ScaleToFit, true);
+		GUI.DrawTexture(new Rect(Screen.width / 1.23f, Screen.height / 3f, Screen.width / 7f, Screen.height), brakeButtonTex, ScaleMode.ScaleToFit, true);
 	}
 
-	void Update()
-	{}
->>>>>>> FETCH_HEAD:Assets/Scripts/CarScripts/CarController.cs
 }
