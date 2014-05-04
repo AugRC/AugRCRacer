@@ -30,7 +30,8 @@ public class CarBehavior : MonoBehaviour {
 	}
 
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
 		controller = new DummyCarController();
 		this.groundDetector = this.GetComponent<GroundDetector>();
 		
@@ -40,7 +41,7 @@ public class CarBehavior : MonoBehaviour {
 
 	IEnumerator startAfterSec()
 	{
-		yield return new WaitForSeconds(5);
+		yield return new WaitForSeconds(10);
 		StartCar();
 	}
 
@@ -55,6 +56,7 @@ public class CarBehavior : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		transform.Rotate(new Vector3(0,0,-4*transform.localEulerAngles.z * Time.deltaTime));
 		if(!canGo)
 			return;
 		controller.readControls();
