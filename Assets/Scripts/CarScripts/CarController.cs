@@ -2,6 +2,7 @@
 using System.Collections;
 
 
+<<<<<<< HEAD
 public class CarController : MonoBehaviour  {
 	public Texture leftButtonTex;
 	public Texture rightButtonTex;
@@ -10,6 +11,9 @@ public class CarController : MonoBehaviour  {
 	private bool brakePressed = false;
 	private bool leftPressed = false;
 	private bool rightPressed = false;
+=======
+public class CarController : MonoBehaviour{
+>>>>>>> FETCH_HEAD
 	
 	void Start () 
 	{
@@ -60,6 +64,7 @@ public class CarController : MonoBehaviour  {
 	
 	public void readControls()
 	{}
+<<<<<<< HEAD
 	
 //	void OnGUI ()
 //	{
@@ -103,3 +108,7 @@ public class CarController : MonoBehaviour  {
 	}
 
 }
+=======
+
+}
+>>>>>>> FETCH_HEAD

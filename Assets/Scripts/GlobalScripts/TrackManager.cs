@@ -2,9 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public static class TrackManager {
+public class TrackManager : MonoBehaviour{
 
-	static HashSet<int> initializedIds = new HashSet<int>();
+	//static HashSet<int> initializedIds = new HashSet<int>();
 
+	public GameObject WorldObj;
+	public static GameObject World;
+
+	void Awake(){
+		World = WorldObj;
+	}
 
 }
