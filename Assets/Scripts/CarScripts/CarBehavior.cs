@@ -17,7 +17,7 @@ public class CarBehavior : MonoBehaviour {
 	public ICarController controller;
 	private GroundDetector groundDetector;
 
-	private Vector2 direction;
+	private Vector3 direction;
 
 	private float tilt=0;
 	private float maxTilt = 30;
@@ -48,8 +48,8 @@ public class CarBehavior : MonoBehaviour {
 	{
 
 		transform.Rotate(new Vector3(0,angle,0));
-		var newDir = transform.forward;
-		this.direction = new Vector2(newDir.x,newDir.y);
+		this.direction = transform.forward;
+		//this.direction = new Vector2(newDir.x,newDir.y);
 		
 	}
 
@@ -65,25 +65,21 @@ public class CarBehavior : MonoBehaviour {
 		{
 			RotateDirection(this.turnSpeed * Time.deltaTime * (turning == TurnType.TurningLeft ? -1 : 1));
 		}
-		else
-		{
-
-		}
 
 		bool onTheRoad = this.groundDetector.IsOverRoad();
-		this.rigidbody2D.drag = onTheRoad ? roadDrag : grassDrag;
+		this.rigidbody.drag = onTheRoad ? roadDrag : grassDrag;
 
 		if(controller.isBraking())
 		{
-			this.rigidbody2D.drag = this.breakDrag;
+			this.rigidbody.drag = this.breakDrag;
 		}
 		else
 		{
 			var acc = onTheRoad ? accellerationRoad : accellerationGrass;
 			var maxSpeed = onTheRoad ? maxRoadSpeed : maxGrassSpeed;
-			if(this.rigidbody2D.velocity.magnitude < maxSpeed)
+			if(this.rigidbody.velocity.magnitude < maxSpeed)
 			{
-				this.rigidbody2D.AddForce(direction * acc);
+				this.rigidbody.AddForce(direction * acc);
 			}
 
 		}
