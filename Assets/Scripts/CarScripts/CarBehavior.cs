@@ -14,10 +14,10 @@ public class CarBehavior : MonoBehaviour {
 	public float turnSpeed;
 
 
-	public ICarController controller;
+	public CarController controller;
 	private GroundDetector groundDetector;
 
-	private Vector3 direction;
+	private Vector3 accelerationDirection;
 
 	private float tilt=0;
 	private float maxTilt = 30;
@@ -26,22 +26,23 @@ public class CarBehavior : MonoBehaviour {
 
 	public void StartCar()
 	{
+		//this.rigidbody.useGravity = true;
 		canGo = true;
 	}
 
 	// Use this for initialization
 	void Start () 
 	{
-		controller = new DummyCarController();
+		controller = this.GetComponent<CarController>();
 		this.groundDetector = this.GetComponent<GroundDetector>();
 		
 		StartCoroutine(startAfterSec());
-		direction = new Vector2(transform.forward.x, transform.forward.y);
+		accelerationDirection = new Vector2(transform.forward.x, transform.forward.y);
 	}
 
 	IEnumerator startAfterSec()
 	{
-		yield return new WaitForSeconds(10);
+		yield return new WaitForSeconds(5);
 		StartCar();
 	}
 
@@ -49,14 +50,22 @@ public class CarBehavior : MonoBehaviour {
 	{
 
 		transform.Rotate(new Vector3(0,angle,0));
-		this.direction = transform.forward;
+		this.accelerationDirection = transform.forward;
 		//this.direction = new Vector2(newDir.x,newDir.y);
 		
 	}
 
+	void OnCollisionEnter(Collision collisionInfo)
+	{
+		var collitionNormal = collisionInfo.contacts[0].normal;
+
+		//this.rigidbody.AddForceAtPosition(Vector3.Reflect(this.rigidbody.velocity*3, collitionNormal),collisionInfo.contacts[0].point);
+
+	}
+
 	// Update is called once per frame
 	void Update () {
-		transform.Rotate(new Vector3(0,0,-4*transform.localEulerAngles.z * Time.deltaTime));
+		//transform.Rotate(new Vector3(0,0,-1*transform.localEulerAngles.z));
 		if(!canGo)
 			return;
 		controller.readControls();
@@ -65,7 +74,13 @@ public class CarBehavior : MonoBehaviour {
 
 		if(turning != TurnType.NotTurning)
 		{
-			RotateDirection(this.turnSpeed * Time.deltaTime * (turning == TurnType.TurningLeft ? -1 : 1));
+			var yturn = this.turnSpeed * Time.deltaTime * (turning == TurnType.TurningLeft ? -1 : 1);
+			
+			transform.localEulerAngles = new Vector3(0,this.transform.localEulerAngles.y+yturn,0);
+		}
+		else
+		{
+			transform.localEulerAngles = new Vector3(0,this.transform.localEulerAngles.y,0);
 		}
 
 		bool onTheRoad = this.groundDetector.IsOverRoad();
@@ -81,11 +96,11 @@ public class CarBehavior : MonoBehaviour {
 			var maxSpeed = onTheRoad ? maxRoadSpeed : maxGrassSpeed;
 			if(this.rigidbody.velocity.magnitude < maxSpeed)
 			{
-				this.rigidbody.AddForce(direction * acc);
+				this.rigidbody.AddForce(transform.forward * acc);
 			}
-
 		}
-
+		Debug.DrawLine(this.transform.position, transform.forward * 60 + this.transform.position, Color.red);
+		
 
 
 	}
