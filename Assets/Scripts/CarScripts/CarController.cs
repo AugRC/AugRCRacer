@@ -31,7 +31,11 @@ public class CarController : MonoBehaviour  {
 				print (touchPosition.x);
 				Press ("brake");
 			} 
-			
+		}
+		else
+		{	
+			// No finger is on the tablet, so make all bools false
+			Press ("nothing");
 		}
 	}
 	// return if user is touching the brake
@@ -57,6 +61,11 @@ public class CarController : MonoBehaviour  {
 	{
 		switch (button)
 		{
+			case "nothing":
+				leftPressed = false;
+				rightPressed = false;
+				brakePressed = false;
+				break;
 			case "left":
 				leftPressed = true;
 				rightPressed = false;
