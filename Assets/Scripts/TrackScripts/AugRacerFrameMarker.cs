@@ -82,6 +82,7 @@ public class AugRacerFrameMarker : MonoBehaviour,
 			}
 
 			GameObject g = (GameObject)Instantiate(PrefabManager.GetPrefab(prefabname), transform.position, Quaternion.identity);
+			//g.transform.RotateAround(g.transform.position, g.transform.forward, 
 			g.transform.localScale = Vector3.Scale( this.transform.localScale, g.transform.localScale);
 			g.transform.position = new Vector3(g.transform.position.x, g.transform.position.y,0);
 			g.transform.parent = TrackManager.World.transform;
