@@ -31,3 +31,8 @@ ExportedObj/
 Icon?
 ehthumbs.db
 Thumbs.db
+*.meta
+
+*.meta
+
+Assets/Models/Textures/roadtex-horizontal.png.meta
