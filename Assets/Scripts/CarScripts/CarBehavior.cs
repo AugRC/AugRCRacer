@@ -54,14 +54,14 @@ public class CarBehavior : MonoBehaviour {
 		//this.direction = new Vector2(newDir.x,newDir.y);
 		
 	}
-
+	/*
 	void OnCollisionEnter(Collision collisionInfo)
 	{
 		var collitionNormal = collisionInfo.contacts[0].normal;
 
 		//this.rigidbody.AddForceAtPosition(Vector3.Reflect(this.rigidbody.velocity*3, collitionNormal),collisionInfo.contacts[0].point);
 
-	}
+	}*/
 
 	// Update is called once per frame
 	void Update () {

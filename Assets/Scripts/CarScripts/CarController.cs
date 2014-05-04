@@ -25,10 +25,5 @@ public class CarController : MonoBehaviour{
 	
 	public void readControls()
 	{}
-	
-	void OnGUI ()
-	{
-		if (GUI.Button(new Rect(10, 10, 50, 50), "hello"))
-			print ("hello");
-	}
+
 }
