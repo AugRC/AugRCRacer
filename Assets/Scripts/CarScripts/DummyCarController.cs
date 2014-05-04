@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DummyCarController : ICarController {
+public class DummyCarController : MonoBehaviour, ICarController  {
 	
+	// return if the person is touching the break
 	public bool isBraking()
 	{
 		return Input.GetKey(KeyCode.Space);
@@ -23,4 +24,10 @@ public class DummyCarController : ICarController {
 	
 	public void readControls()
 	{}
+	
+	void OnGUI ()
+	{
+		if (GUI.Button(new Rect(10, 10, 50, 50), "hello"))
+			print ("hello");
+	}
 }
