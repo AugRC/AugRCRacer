@@ -24,6 +24,8 @@ public class CarBehavior : MonoBehaviour {
 
 	private bool canGo;
 
+
+
 	public void StartCar()
 	{
 		//this.rigidbody.useGravity = true;
@@ -68,19 +70,15 @@ public class CarBehavior : MonoBehaviour {
 		//transform.Rotate(new Vector3(0,0,-1*transform.localEulerAngles.z));
 		if(!canGo)
 			return;
-		controller.readControls();
+		//controller.readControls();
 
 		var turning = controller.getTurn();
 
 		if(turning != TurnType.NotTurning)
 		{
-			var yturn = this.turnSpeed * Time.deltaTime * (turning == TurnType.TurningLeft ? -1 : 1);
-			
-			transform.localEulerAngles = new Vector3(0,this.transform.localEulerAngles.y+yturn,0);
-		}
-		else
-		{
-			transform.localEulerAngles = new Vector3(0,this.transform.localEulerAngles.y,0);
+			var turnAmount = this.turnSpeed * Time.deltaTime * (turning == TurnType.TurningLeft ? -1 : 1);
+			transform.RotateAround(transform.position, transform.up, turnAmount);
+			//transform.localEulerAngles = new Vector3((this.transform.localEulerAngles.x+turnAmount)%360,90,270);
 		}
 
 		bool onTheRoad = this.groundDetector.IsOverRoad();
@@ -99,9 +97,17 @@ public class CarBehavior : MonoBehaviour {
 				this.rigidbody.AddForce(transform.forward * acc);
 			}
 		}
-		Debug.DrawLine(this.transform.position, transform.forward * 60 + this.transform.position, Color.red);
+
+		Vector3 worldUp = -TrackManager.World.transform.forward;
+		Vector3 pivot = Vector3.Cross(worldUp, transform.up);
+		float angl = Vector3.Angle(transform.up, worldUp);
+		Debug.Log(angl);
+		if (angl > 0)
+			transform.RotateAround(transform.position, pivot, -1*angl);// turnSpeed*Time.deltaTime/10f);
+
+		//Debug.DrawLine(this.transform.position, transform.forward * 60 + this.transform.position, Color.red);
 		
 
-
+		//transform.localEulerAngles = new Vector3(this.transform.localEulerAngles.x,90,270);
 	}
 }
