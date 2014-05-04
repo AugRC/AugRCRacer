@@ -67,7 +67,7 @@ public class AugRacerFrameMarker : MonoBehaviour,
 		string prefabname = "";
 
 		MarkerBehaviour mb = this.GetComponent<MarkerBehaviour>();
-		Debug.LogWarning(mb.Marker.MarkerID);
+//		Debug.LogWarning(mb.Marker.MarkerID);
 
 		if (mb.Marker.MarkerID != 0){
 			switch (mb.Marker.MarkerID % 4){
@@ -81,30 +81,39 @@ public class AugRacerFrameMarker : MonoBehaviour,
 				break;
 			}
 
-			GameObject g = (GameObject)Instantiate(PrefabManager.GetPrefab(prefabname), transform.position, Quaternion.identity);
+			Debug.LogWarning(prefabname+transform.position);
+
+			GameObject g = (GameObject)Instantiate(PrefabManager.GetPrefab(prefabname), transform.position, transform.rotation);
 			//g.transform.RotateAround(g.transform.position, g.transform.forward, 
 			g.transform.localScale = Vector3.Scale( this.transform.localScale, g.transform.localScale);
-			g.transform.position = new Vector3(g.transform.position.x, g.transform.position.y,0);
+			g.transform.position = new Vector3(g.transform.position.x, 0, g.transform.position.z);
 			g.transform.parent = TrackManager.World.transform;
 
 
 		}
 		else{
 
-			Renderer[] rendererComponents = GetComponentsInChildren<Renderer>(true);
-			Collider[] colliderComponents = GetComponentsInChildren<Collider>(true);
-			
-			// Enable rendering:
-			foreach (Renderer component in rendererComponents)
-			{
-				component.enabled = true;
-			}
-			
-			// Enable colliders:
-			foreach (Collider component in colliderComponents)
-			{
-				component.enabled = true;
-			}
+			Debug.LogWarning("StartBlock"+transform.position);
+
+			GameObject g = (GameObject)Instantiate(PrefabManager.GetPrefab("StartBlock"), transform.position, transform.rotation);
+
+			g.transform.localScale = Vector3.Scale( this.transform.localScale, g.transform.localScale);
+			g.transform.position = new Vector3(g.transform.position.x, 0, g.transform.position.z);
+			g.transform.parent = TrackManager.World.transform;
+//			Renderer[] rendererComponents = GetComponentsInChildren<Renderer>(true);
+//			Collider[] colliderComponents = GetComponentsInChildren<Collider>(true);
+//			
+//			// Enable rendering:
+//			foreach (Renderer component in rendererComponents)
+//			{
+//				component.enabled = true;
+//			}
+//			
+//			// Enable colliders:
+//			foreach (Collider component in colliderComponents)
+//			{
+//				component.enabled = true;
+//			}
 		}
 			
 		childrenCreated = true;

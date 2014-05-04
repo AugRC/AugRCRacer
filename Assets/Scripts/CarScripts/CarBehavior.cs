@@ -98,12 +98,12 @@ public class CarBehavior : MonoBehaviour {
 			}
 		}
 
-		Vector3 worldUp = -TrackManager.World.transform.forward;
+		Vector3 worldUp = TrackManager.World.transform.up;
 		Vector3 pivot = Vector3.Cross(worldUp, transform.up);
 		float angl = Vector3.Angle(transform.up, worldUp);
-		Debug.Log(angl);
-		if (angl > 0)
-			transform.RotateAround(transform.position, pivot, -1*angl);// turnSpeed*Time.deltaTime/10f);
+//		Debug.Log(angl);
+
+		transform.RotateAround(transform.position, pivot, -1*angl);// turnSpeed*Time.deltaTime/10f);
 
 		//Debug.DrawLine(this.transform.position, transform.forward * 60 + this.transform.position, Color.red);
 		
