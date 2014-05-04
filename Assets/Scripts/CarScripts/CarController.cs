@@ -2,7 +2,6 @@
 using System.Collections;
 
 
-<<<<<<< HEAD
 public class CarController : MonoBehaviour  {
 	public Texture leftButtonTex;
 	public Texture rightButtonTex;
@@ -11,15 +10,7 @@ public class CarController : MonoBehaviour  {
 	private bool brakePressed = false;
 	private bool leftPressed = false;
 	private bool rightPressed = false;
-=======
-public class CarController : MonoBehaviour{
->>>>>>> FETCH_HEAD
-	
-	void Start () 
-	{
 
-	}
-	
 	// Update is called once per frame
 	void Update () {
 		if (Input.touchCount > 0)
@@ -61,22 +52,6 @@ public class CarController : MonoBehaviour{
 		}
 		return TurnType.NotTurning;
 	}
-	
-	public void readControls()
-	{}
-<<<<<<< HEAD
-	
-//	void OnGUI ()
-//	{
-//		if (GUI.Button(new Rect(0, 0, Screen.width / 5, Screen.height), "Left"))
-//			print ("Left");
-//			
-//		if (GUI.Button(new Rect(Screen.width / 5, 0, Screen.width / 5, Screen.height), "Right"))
-//			print ("Right");
-//			
-//		if (GUI.Button(new Rect(Screen.width / 2.5f, 0, Screen.width / 1.7f, Screen.height), "Brake"))
-//			print ("Brake");
-//	}
 
 	private void Press (string button)
 	{
@@ -106,9 +81,4 @@ public class CarController : MonoBehaviour{
 		GUI.DrawTexture(new Rect(Screen.width / 5f, Screen.height / 3f, Screen.width / 7f, Screen.height), rightButtonTex, ScaleMode.ScaleToFit, true);
 		GUI.DrawTexture(new Rect(Screen.width / 1.23f, Screen.height / 3f, Screen.width / 7f, Screen.height), brakeButtonTex, ScaleMode.ScaleToFit, true);
 	}
-
 }
-=======
-
-}
->>>>>>> FETCH_HEAD
