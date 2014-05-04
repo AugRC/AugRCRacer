@@ -15,22 +15,28 @@ public class CarController : MonoBehaviour  {
 	void Update () {
 		if (Input.touchCount > 0)
 		{
-			Vector2 touchPosition = Input.GetTouch (0).position;
-			if (touchPosition.x < (Screen.width/5)) 
-			{
-				print (touchPosition.x);
-				Press ("left");
+			for(int i = 0; i < Input.touchCount; i++){
+				Vector2 touchPosition = Input.GetTouch (i).position;
+				
+				// Left button
+				if (!rightPressed && touchPosition.x < (Screen.width/5)) 
+				{
+					print (touchPosition.x);
+					Press ("left");
+				}
+				
+				// Right button
+				else if (!leftPressed && touchPosition.x < (Screen.width * (2f / 5f)))
+				{
+					print (touchPosition.x);
+					Press ("right");
+				}
+				else 
+				{
+					print (touchPosition.x);
+					Press ("brake");
+				} 
 			}
-			else if (touchPosition.x < (Screen.width * (2f / 5f)))
-			{
-				print (touchPosition.x);
-				Press ("right");
-			}
-			else 
-			{
-				print (touchPosition.x);
-				Press ("brake");
-			} 
 		}
 		else
 		{	
